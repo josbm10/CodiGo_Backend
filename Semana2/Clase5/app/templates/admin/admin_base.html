@@ -1,0 +1,28 @@
+{% extends 'bootstrap/base.html' %}
+{% block head %}
+    {{ super() }}
+    <!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">-->
+    <title>
+        PANEL DE ADMINISTRACIÓN
+    </title>
+{% endblock %}
+{% block body %}
+    {% block navbar %}
+        {% if session['token'] %}
+            {% include 'admin/navbar.html' %}
+        {% endif %}
+    {% endblock %}
+    {% for message in get_flashed_messages() %}
+        <div class="alert alert-success alert-dismissible">
+            <button type="button"
+                data-dismiss="alert"
+                class="close">&times;</button>
+            {{message}}
+        </div>
+    {% endfor %}
+    {% block content %} 
+    {% endblock %}
+    {% block scripts %}
+        {{ super() }}
+    {% endblock %}
+{% endblock %}
