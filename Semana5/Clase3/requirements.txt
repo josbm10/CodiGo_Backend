@@ -1,0 +1,5 @@
+django
+djangorestframework
+cloudinary
+python-decouple
+django-cors-headers
