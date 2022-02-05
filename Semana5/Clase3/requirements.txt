@@ -3,3 +3,4 @@ djangorestframework
 cloudinary
 python-decouple
 django-cors-headers
+djangorestframework-simplejwt

@@ -12,8 +12,8 @@ const AuthLogin = (props) => {
 	}
 
 	const [formulario, setFormulario] = useState({
-		correo: 'jgarnica@gmail.com',
-		password: 'codigo2021'
+		correo: 'josbm10@hotmail.com',
+		password: 'codigo2022'
 	});
 
 	const handleChange = (e) => {

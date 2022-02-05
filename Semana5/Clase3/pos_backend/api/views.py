@@ -5,9 +5,13 @@ from rest_framework.response import Response
 from .models import *
 from .serializers import *
 
+from rest_framework.permissions import IsAuthenticated
+
 # Create your views here.
 
 class IndexView(APIView):
+    
+    permission_classes=[IsAuthenticated]
     def get(self, request):
         context={
             'ok':True,
@@ -39,10 +43,36 @@ class CategoriaPlatosView(APIView):
         return Response(context)
 
 class PedidoView(APIView):
-    def post(self, request):
-        serPedido=PedidoSerializerPOST(data=request.data)
+    
+    def get(self,request):
+        dataPedido = Pedido.objects.all()
+        serPedido = PedidoSerializerGET(dataPedido,many=True)
+        
+        context = {
+            'ok':True,
+            'pedidos':serPedido.data
+        }
+        
+        return Response(context)
+    
+    def post(self,request):
+        serPedido  = PedidoSerializerPOST(data=request.data)
         serPedido.is_valid(raise_exception=True)
         serPedido.save()
-        context={'ok':True,
-            'content':serPedido.data}
+        
+        return Response({
+            'ok':True,
+            'content':serPedido.data
+        })
+        
+class PlatoView(APIView):
+    
+    def get(self,request):
+        dataPlato = Plato.objects.all()
+        serPlato = PlatoSerializer(dataPlato,many=True)
+        context = {
+            'ok':True,
+            'content':serPlato.data
+        }
         return Response(context)
+    
